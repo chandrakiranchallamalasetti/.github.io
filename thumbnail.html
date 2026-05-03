@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 627px;
+    background: #1a1a18;
+    font-family: 'Syne', 'Segoe UI', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Background circles */
+  .circle1 {
+    position: absolute;
+    width: 500px; height: 500px;
+    border: 1px solid rgba(29,158,117,0.15);
+    border-radius: 50%;
+    top: -150px; right: -100px;
+  }
+  .circle2 {
+    position: absolute;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(29,158,117,0.1);
+    border-radius: 50%;
+    top: -50px; right: 50px;
+  }
+  .circle3 {
+    position: absolute;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(29,158,117,0.08);
+    border-radius: 50%;
+    bottom: -80px; left: 500px;
+  }
+
+  /* Grid dots */
+  .dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(29,158,117,0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Green left bar */
+  .left-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: #1D9E75;
+  }
+
+  .content {
+    position: relative;
+    padding: 60px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.4);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: #1D9E75;
+    margin-bottom: 28px;
+    width: fit-content;
+    letter-spacing: 0.05em;
+  }
+
+  .pulse-dot {
+    width: 8px; height: 8px;
+    background: #1D9E75;
+    border-radius: 50%;
+  }
+
+  .name {
+    font-size: 58px;
+    font-weight: 700;
+    color: #f6f4ef;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+
+  .name em {
+    color: #1D9E75;
+    font-style: italic;
+  }
+
+  .roles {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    margin-top: 16px;
+  }
+
+  .role-tag {
+    background: rgba(29,158,117,0.12);
+    border: 1px solid rgba(29,158,117,0.35);
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: rgba(29,158,117,0.9);
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: #1D9E75;
+    margin-bottom: 24px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 36px;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1D9E75;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(246,244,239,0.45);
+    font-family: 'Courier New', monospace;
+    line-height: 1.3;
+    max-width: 100px;
+  }
+
+  .url {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: rgba(246,244,239,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .url span { color: #1D9E75; }
+
+  /* Right side mini pipeline */
+  .pipeline {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .pipe-box {
+    background: rgba(15,110,86,0.2);
+    border: 1px solid rgba(29,158,117,0.4);
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #5DCAA5;
+    position: relative;
+    min-width: 160px;
+    text-align: center;
+  }
+
+  .pipe-box.active {
+    background: rgba(15,110,86,0.5);
+    border-color: #1D9E75;
+    color: #fff;
+  }
+
+  .pipe-connector {
+    width: 2px;
+    height: 12px;
+    background: rgba(29,158,117,0.4);
+    margin: 0 auto;
+    position: relative;
+    right: 0;
+    align-self: center;
+    margin-right: 60px;
+  }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+  <div class="circle1"></div>
+  <div class="circle2"></div>
+  <div class="circle3"></div>
+  <div class="left-bar"></div>
+
+  <div class="content">
+    <div class="badge">
+      <span class="pulse-dot"></span>
+      Open to Work · St. Louis, MO
+    </div>
+
+    <div class="name">Chandra Kiran<br><em>Challamalasetti</em></div>
+
+    <div class="roles">
+      <span class="role-tag">Data Engineer</span>
+      <span class="role-tag">ETL Developer</span>
+      <span class="role-tag">Data Analyst</span>
+      <span class="role-tag">Analytics Engineer</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stats">
+      <div>
+        <div class="stat-num">162K+</div>
+        <div class="stat-label">Records processed</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Platforms · zero defects</div>
+      </div>
+      <div>
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+    </div>
+
+    <div class="url"><span>⬡</span> chandrakiranchallamalasetti.github.io</div>
+  </div>
+
+  <div class="pipeline">
+    <div class="pipe-box active">SOURCE</div>
+    <div class="pipe-connector"></div>
+    <div class="pipe-box">EXTRACT</div>
+    <div class="pipe-connector"></div>
+    <div class="pipe-box">TRANSFORM</div>
+    <div class="pipe-connector"></div>
+    <div class="pipe-box active">LOAD ✓</div>
+  </div>
+</body>
+</html>
