@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandra Kiran Challamalasetti — Data Analytics Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-muted: #5a5a55;
+    --ink-faint: #9a9a94;
+    --paper: #f6f4ef;
+    --paper-card: #ffffff;
+    --accent: #1D9E75;
+    --accent-dark: #0F6E56;
+    --accent-light: #E1F5EE;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --rule: #dddbd4;
+    --radius: 4px;
+  }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 340px; height: 340px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+
+  header::after {
+    content: none;
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .header-text { grid-column: 1; }
+
+  .header-visual {
+    grid-column: 2;
+    width: 260px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 720px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .header-visual { display: none; }
+  }
+
+  /* Pipeline animation */
+  .pipe-node { animation: nodePulse 3s ease-in-out infinite; }
+  .pipe-node:nth-child(2) { animation-delay: 0.5s; }
+  .pipe-node:nth-child(3) { animation-delay: 1s; }
+  .pipe-node:nth-child(4) { animation-delay: 1.5s; }
+
+  @keyframes nodePulse {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+
+  .data-packet {
+    animation: flowPacket 2.8s linear infinite;
+    opacity: 0;
+  }
+  .data-packet:nth-child(1) { animation-delay: 0s; }
+  .data-packet:nth-child(2) { animation-delay: 0.9s; }
+  .data-packet:nth-child(3) { animation-delay: 1.8s; }
+
+  @keyframes flowPacket {
+    0%   { offset-distance: 0%;   opacity: 0; }
+    5%   { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { offset-distance: 100%; opacity: 0; }
+  }
+
+  .orbit-ring {
+    transform-origin: 130px 125px;
+    animation: spin 18s linear infinite;
+  }
+  .orbit-ring-2 {
+    transform-origin: 130px 125px;
+    animation: spin 26s linear infinite reverse;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .bar-fill { animation: barGrow 2s ease-out forwards; transform-origin: bottom; }
+  .bar-fill:nth-child(1) { animation-delay: 0.2s; }
+  .bar-fill:nth-child(2) { animation-delay: 0.4s; }
+  .bar-fill:nth-child(3) { animation-delay: 0.6s; }
+  .bar-fill:nth-child(4) { animation-delay: 0.8s; }
+
+  @keyframes barGrow {
+    from { transform: scaleY(0); opacity: 0; }
+    to   { transform: scaleY(1); opacity: 1; }
+  }
+
+  .check-draw {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawCheck 0.6s ease forwards 1.8s;
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .blink-cursor {
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--paper);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    color: rgba(246,244,239,0.65);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .contact-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(246,244,239,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+
+  .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* STATUS BADGE */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .pulse {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  section { margin-bottom: 3.5rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  /* STAT CARDS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--paper-card);
+    padding: 1.3rem 1.4rem;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--accent-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-desc {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* EXPERIENCE */
+  .exp-card {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.6rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .exp-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--accent-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .exp-summary {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bullet-list li {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .bullet-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-group {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.3rem;
+  }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .tag.amber {
+    background: var(--amber-light);
+    color: var(--amber);
+  }
+
+  .tag.neutral {
+    background: #f1efe8;
+    color: #5a5a55;
+  }
+
+  /* PROJECT */
+  .project-card {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.6rem;
+  }
+
+  .project-card::before {
+    display: none;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .edu-card {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.4rem;
+  }
+
+  .edu-degree {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-school {
+    font-size: 0.88rem;
+    color: var(--accent-dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .edu-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-bottom: 0.8rem;
+  }
+
+  .edu-courses {
+    font-size: 0.83rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* OPPORTUNITIES BANNER */
+  .opportunities-banner {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3.5rem;
+  }
+
+  .opportunities-banner::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 50%;
+  }
+
+  .opportunities-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 60px;
+    width: 140px; height: 140px;
+    border: 1px solid rgba(29,158,117,0.1);
+    border-radius: 50%;
+  }
+
+  .opp-left { position: relative; }
+
+  .opp-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .opp-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--paper);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .opp-heading em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .opp-desc {
+    font-size: 0.9rem;
+    color: rgba(246,244,239,0.55);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+  }
+
+  .opp-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .opp-role {
+    background: rgba(29,158,117,0.12);
+    border: 1px solid rgba(29,158,117,0.3);
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: rgba(29,158,117,0.9);
+  }
+
+  .opp-cta {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid rgba(246,244,239,0.2);
+    color: rgba(246,244,239,0.7);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    text-align: center;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .opportunities-banner {
+      grid-template-columns: 1fr;
+    }
+    .opp-cta {
+      flex-direction: row;
+    }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(246,244,239,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    header { padding: 3rem 1.4rem 2.5rem; }
+    main { padding: 2rem 1.4rem 4rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-text">
+      <div class="status-badge">
+        <span class="pulse"></span>
+        Available immediately · St. Louis, MO · Open to relocation
+      </div>
+      <p class="eyebrow">Data Analytics Portfolio</p>
+      <h1>Chandra Kiran<br><em>Challamalasetti</em></h1>
+      <p class="tagline">Data engineer with 2+ years delivering zero-defect ETL pipelines across enterprise environments — Oracle, Informatica, Teradata, Unix.</p>
+      <div class="contact-strip">
+        <a href="mailto:chandrakiranchallamalasetti@gmail.com" class="contact-item">
+          <span class="dot"></span>chandrakiranchallamalasetti@gmail.com
+        </a>
+        <a href="tel:+14695799618" class="contact-item">
+          <span class="dot"></span>+1 (469) 579-9618
+        </a>
+        <a href="https://linkedin.com" class="contact-item">
+          <span class="dot"></span>LinkedIn Profile
+        </a>
+      </div>
+    </div>
+
+    <!-- Animated ETL Pipeline Illustration -->
+    <div class="header-visual">
+      <svg viewBox="0 0 260 250" width="260" height="250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Packet paths along pipeline connectors -->
+          <path id="path1" d="M 65 62 Q 100 62 100 95" fill="none"/>
+          <path id="path2" d="M 100 145 Q 100 172 130 172" fill="none"/>
+          <path id="path3" d="M 180 172 Q 210 172 210 145" fill="none"/>
+
+          <!-- Subtle glow filter -->
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background grid dots -->
+        <g opacity="0.08">
+          <circle cx="20" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="50" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="80" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="110" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="140" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="170" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="200" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="20" r="1.5" fill="#1D9E75"/>
+          <circle cx="20" cy="50" r="1.5" fill="#1D9E75"/>
+          <circle cx="50" cy="50" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="50" r="1.5" fill="#1D9E75"/>
+          <circle cx="20" cy="80" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="80" r="1.5" fill="#1D9E75"/>
+          <circle cx="20" cy="110" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="110" r="1.5" fill="#1D9E75"/>
+          <circle cx="20" cy="200" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="200" r="1.5" fill="#1D9E75"/>
+          <circle cx="20" cy="230" r="1.5" fill="#1D9E75"/>
+          <circle cx="50" cy="230" r="1.5" fill="#1D9E75"/>
+          <circle cx="200" cy="230" r="1.5" fill="#1D9E75"/>
+          <circle cx="230" cy="230" r="1.5" fill="#1D9E75"/>
+        </g>
+
+        <!-- ─── PIPELINE CONNECTORS ─── -->
+        <!-- Source → Extract -->
+        <line x1="65" y1="62" x2="100" y2="95" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+        <!-- Extract → Transform -->
+        <line x1="100" y1="145" x2="100" y2="172" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+        <!-- Transform → Load -->
+        <line x1="180" y1="172" x2="210" y2="145" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+        <!-- Orbit ring decorative -->
+        <ellipse class="orbit-ring" cx="130" cy="125" rx="90" ry="28" fill="none" stroke="rgba(29,158,117,0.12)" stroke-width="1"/>
+        <ellipse class="orbit-ring-2" cx="130" cy="125" rx="70" ry="20" fill="none" stroke="rgba(186,117,23,0.1)" stroke-width="1"/>
+
+        <!-- ─── NODES ─── -->
+
+        <!-- SOURCE — top-left -->
+        <g class="pipe-node">
+          <rect x="20" y="38" width="90" height="48" rx="8" fill="rgba(15,110,86,0.9)" stroke="#1D9E75" stroke-width="1"/>
+          <!-- DB cylinder icon -->
+          <ellipse cx="45" cy="55" rx="10" ry="4" fill="none" stroke="#5DCAA5" stroke-width="1.2"/>
+          <line x1="35" y1="55" x2="35" y2="68" stroke="#5DCAA5" stroke-width="1.2"/>
+          <line x1="55" y1="55" x2="55" y2="68" stroke="#5DCAA5" stroke-width="1.2"/>
+          <ellipse cx="45" cy="68" rx="10" ry="4" fill="none" stroke="#5DCAA5" stroke-width="1.2"/>
+          <text x="68" y="60" font-size="9" fill="#9FE1CB" font-family="monospace" font-weight="500">SOURCE</text>
+          <text x="68" y="72" font-size="7.5" fill="rgba(159,225,203,0.6)" font-family="monospace">Oracle · Teradata</text>
+        </g>
+
+        <!-- EXTRACT — center -->
+        <g class="pipe-node" style="animation-delay:0.5s">
+          <rect x="60" y="95" width="80" height="50" rx="8" fill="rgba(26,26,24,0.95)" stroke="#1D9E75" stroke-width="1.5"/>
+          <!-- Funnel icon -->
+          <polygon points="82,107 118,107 110,118 110,132 90,132 90,118" fill="none" stroke="#1D9E75" stroke-width="1.2" stroke-linejoin="round"/>
+          <text x="100" y="141" font-size="8" fill="#1D9E75" font-family="monospace" font-weight="600" text-anchor="middle">EXTRACT</text>
+        </g>
+
+        <!-- TRANSFORM — center-bottom -->
+        <g class="pipe-node" style="animation-delay:1s">
+          <rect x="55" y="155" width="150" height="50" rx="8" fill="rgba(186,117,23,0.15)" stroke="rgba(186,117,23,0.6)" stroke-width="1"/>
+          <!-- Gear / transform icon (simplified) -->
+          <circle cx="85" cy="180" r="12" fill="none" stroke="#BA7517" stroke-width="1.2"/>
+          <circle cx="85" cy="180" r="5" fill="rgba(186,117,23,0.5)"/>
+          <line x1="85" y1="165" x2="85" y2="168" stroke="#BA7517" stroke-width="1.5"/>
+          <line x1="85" y1="192" x2="85" y2="195" stroke="#BA7517" stroke-width="1.5"/>
+          <line x1="70" y1="180" x2="73" y2="180" stroke="#BA7517" stroke-width="1.5"/>
+          <line x1="97" y1="180" x2="100" y2="180" stroke="#BA7517" stroke-width="1.5"/>
+          <!-- Bteq label -->
+          <text x="105" y="175" font-size="8.5" fill="#EF9F27" font-family="monospace" font-weight="500">TRANSFORM</text>
+          <text x="105" y="188" font-size="7" fill="rgba(239,159,39,0.65)" font-family="monospace">Bteq · Informatica</text>
+          <!-- Mini bar chart inside -->
+          <g style="transform-box: fill-box;">
+            <rect class="bar-fill" x="107" y="196" width="7" height="6" rx="1" fill="#BA7517" opacity="0.6" style="transform-origin: 110.5px 202px;"/>
+            <rect class="bar-fill" x="117" y="193" width="7" height="9" rx="1" fill="#BA7517" opacity="0.75" style="transform-origin: 120.5px 202px;"/>
+            <rect class="bar-fill" x="127" y="198" width="7" height="4" rx="1" fill="#BA7517" opacity="0.5" style="transform-origin: 130.5px 202px;"/>
+            <rect class="bar-fill" x="137" y="191" width="7" height="11" rx="1" fill="#BA7517" opacity="0.9" style="transform-origin: 140.5px 202px;"/>
+          </g>
+        </g>
+
+        <!-- LOAD — top-right -->
+        <g class="pipe-node" style="animation-delay:1.5s">
+          <rect x="165" y="95" width="80" height="50" rx="8" fill="rgba(15,110,86,0.9)" stroke="#1D9E75" stroke-width="1.5" filter="url(#glow)"/>
+          <!-- Check circle -->
+          <circle cx="188" cy="120" r="12" fill="none" stroke="#5DCAA5" stroke-width="1.2"/>
+          <polyline class="check-draw" points="182,120 187,126 196,113" fill="none" stroke="#5DCAA5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="204" y="115" font-size="8.5" fill="#9FE1CB" font-family="monospace" font-weight="600">LOAD</text>
+          <text x="204" y="127" font-size="7" fill="rgba(159,225,203,0.65)" font-family="monospace">EDW · 100%</text>
+        </g>
+
+        <!-- ─── ANIMATED DATA PACKETS ─── -->
+        <circle class="data-packet" r="4" fill="#1D9E75" style="offset-path: path('M 65 62 Q 100 62 100 95');" opacity="0"/>
+        <circle class="data-packet" r="4" fill="#1D9E75" style="offset-path: path('M 100 145 Q 100 163 130 163 Q 160 163 160 145');" opacity="0"/>
+        <circle class="data-packet" r="4" fill="#5DCAA5" style="offset-path: path('M 180 172 Q 210 172 210 145');" opacity="0"/>
+
+        <!-- ─── FLOATING TERMINAL SNIPPET ─── -->
+        <g opacity="0.75">
+          <rect x="148" y="30" width="100" height="52" rx="5" fill="rgba(26,26,24,0.95)" stroke="rgba(29,158,117,0.3)" stroke-width="0.8"/>
+          <circle cx="160" cy="40" r="3" fill="#FF5F57"/>
+          <circle cx="171" cy="40" r="3" fill="#FEBC2E"/>
+          <circle cx="182" cy="40" r="3" fill="#28C840"/>
+          <text x="155" y="54" font-size="7" fill="#1D9E75" font-family="monospace">$ bteq &lt; load.sql</text>
+          <text x="155" y="64" font-size="7" fill="rgba(93,202,165,0.7)" font-family="monospace">162,418 rows OK</text>
+          <text x="155" y="74" font-size="7" fill="#1D9E75" font-family="monospace">
+            <tspan>_</tspan>
+            <tspan class="blink-cursor">▋</tspan>
+          </text>
+        </g>
+
+        <!-- ─── LABEL: ETL pipeline ─── -->
+        <text x="130" y="242" font-size="8" fill="rgba(29,158,117,0.5)" font-family="monospace" text-anchor="middle" letter-spacing="2">ETL PIPELINE</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- BY THE NUMBERS -->
+  <section>
+    <div class="section-label">By the numbers</div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">162K+</div>
+        <div class="stat-desc">Source records processed with 100% data reconciliation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-desc">Integrated platforms in zero-defect EDW migrations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2+</div>
+        <div class="stat-desc">Years of enterprise data engineering experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-desc">Data integrity across four production schemas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-label">Experience</div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Programmer Analyst</div>
+          <div class="exp-company">Cognizant · Hyderabad, India</div>
+        </div>
+        <div class="exp-date">Jul 2022 – Dec 2023</div>
+      </div>
+      <p class="exp-summary">Led end-to-end ETL pipeline migrations ensuring 100% data reconciliation across 162K+ records in a multi-platform EDW environment.</p>
+      <ul class="bullet-list">
+        <li>Ensured zero-defect releases across Oracle, Informatica, Teradata, and Unix by leading migrations from development to production</li>
+        <li>Validated and executed ETL workflows with full staging and target layer verification for 162,000+ source records</li>
+        <li>Managed Informatica workflow deployments and DDL/DML script executions in collaboration with DBA teams</li>
+        <li>Designed and executed Bteq scripts for staging-to-target loads with full run-stat verification, reducing data movement errors</li>
+        <li>Developed structured implementation and rollback plans ensuring full recoverability across all EDW pipeline components</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Programmer Analyst Trainee</div>
+          <div class="exp-company">Cognizant · Hyderabad, India</div>
+        </div>
+        <div class="exp-date">Feb 2022 – Jun 2022</div>
+      </div>
+      <p class="exp-summary">Streamlined a 3-layer EDW data pipeline by integrating two source systems and automating staging-to-target loads.</p>
+      <ul class="bullet-list">
+        <li>Designed ETL pipelines integrating Oracle and Teradata source systems into a 3-layer EDW architecture</li>
+        <li>Built Bteq and KSH scripts implementing two load strategies: Truncate &amp; Load, and Update-else-Insert</li>
+        <li>Managed concurrent table development tasks involving new table builds and schema changes across Dev and Test servers</li>
+        <li>Delivered Unit Testing documentation and Implementation Plans supporting full ETL deployment lifecycle</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section>
+    <div class="section-label">Academic Project</div>
+    <div class="project-card">
+      <div class="exp-header">
+        <div>
+          <p class="project-title">Lab Abnormalities as Predictors of Chronic Disease</p>
+          <div class="exp-company">Saint Louis University · Master's Capstone</div>
+        </div>
+        <div class="exp-date">Aug 2025 – Dec 2025</div>
+      </div>
+      <p class="exp-summary">Cloud-based ETL pipeline for chronic disease risk identification from patient lab reports.</p>
+      <ul class="bullet-list">
+        <li>Designed a cloud-based ETL pipeline processing patient lab reports, enabling chronic disease risk identification within 2 minutes per report</li>
+        <li>Applied ML clustering and risk modeling to generate automated health summaries with 100% data integrity and privacy compliance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Core competencies</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Data Engineering / ETL</div>
+        <div class="tag-cloud">
+          <span class="tag">Informatica PowerCenter</span>
+          <span class="tag">IICS (Cloud ETL)</span>
+          <span class="tag">Teradata / Bteq</span>
+          <span class="tag">Oracle SQL</span>
+          <span class="tag">ETL Validation</span>
+          <span class="tag">Data Pipelines</span>
+          <span class="tag">EDW Integration</span>
+          <span class="tag">KSH Scripting</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Analytics & Visualization</div>
+        <div class="tag-cloud">
+          <span class="tag amber">Microsoft Power BI</span>
+          <span class="tag amber">R (Statistical)</span>
+          <span class="tag amber">Predictive Analytics</span>
+          <span class="tag amber">Data Visualization</span>
+          <span class="tag amber">Statistical Analysis</span>
+          <span class="tag amber">ML Clustering</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Platforms</div>
+        <div class="tag-cloud">
+          <span class="tag neutral">Linux / PuTTY</span>
+          <span class="tag neutral">Jira Software</span>
+          <span class="tag neutral">Hugging Face (NLP)</span>
+          <span class="tag neutral">MS Excel / PowerPoint</span>
+          <span class="tag neutral">Database Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">M.S. in Analytics</div>
+        <div class="edu-school">Saint Louis University · St. Louis, MO</div>
+        <div class="edu-date">Jan 2024 – Dec 2025</div>
+        <div class="edu-courses">Data Analysis · Data Visualization · Statistical Analysis · Predictive Analytics · Business Intelligence · Data Management · Decision-making Analytics</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">B.Tech in Mechanical Engineering</div>
+        <div class="edu-school">SRM Institute of Science & Technology · India</div>
+        <div class="edu-date">Jun 2018 – May 2022</div>
+        <div class="edu-courses">Database Management Systems · Statistical Methods & Data Analysis · Operations Research · Programming for Problem Solving · Quality Control</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN TO OPPORTUNITIES -->
+  <section>
+    <div class="section-label">Availability</div>
+    <div class="opportunities-banner">
+      <div class="opp-left">
+        <div class="opp-tag">
+          <span class="pulse"></span>
+          Actively seeking opportunities
+        </div>
+        <h2 class="opp-heading">Let's build something<br><em>great together.</em></h2>
+        <p class="opp-desc">I'm a Data Analytics graduate based in St. Louis, MO — available immediately and open to relocation. I'm looking for roles where I can bring my ETL, data pipeline, and analytics expertise to a team that values data-driven decision making.</p>
+        <div class="opp-roles">
+          <span class="opp-role">Data Engineer</span>
+          <span class="opp-role">ETL Developer</span>
+          <span class="opp-role">Data Analyst</span>
+          <span class="opp-role">BI Developer</span>
+          <span class="opp-role">Analytics Engineer</span>
+        </div>
+      </div>
+      <div class="opp-cta">
+        <a href="mailto:chandrakiranchallamalasetti@gmail.com" class="btn-primary">Email Me</a>
+        <a href="https://linkedin.com/in/chandrakiranchallamalasetti" class="btn-secondary">View LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Chandra Kiran Challamalasetti &nbsp;·&nbsp; <a href="mailto:chandrakiranchallamalasetti@gmail.com">chandrakiranchallamalasetti@gmail.com</a> &nbsp;·&nbsp; St. Louis, MO 63108</p>
+</footer>
+
+</body>
+</html>
